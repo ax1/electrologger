@@ -16,7 +16,7 @@ def loadConfigFile():
         data = f.read()
     except FileNotFoundError:
         data = inspect.cleandoc('''{
-            "file_interval": 60000,
+            "file_interval": 600,
             "file_rows": 10000
         }''')
         f = open(path, 'w')

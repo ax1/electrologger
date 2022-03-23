@@ -5,8 +5,11 @@
 
 import json
 import os
+import time
 
 
 def start():
     config = json.loads(os.environ.get('config'))
-    print(config)
+    while(True):
+        time.sleep(config['file_interval'])
+        print('EEPA')
