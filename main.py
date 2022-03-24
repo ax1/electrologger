@@ -15,10 +15,12 @@ def loadConfigFile():
         f = open(path, 'r')
         data = f.read()
     except FileNotFoundError:
-        data = inspect.cleandoc('''{
-            "file_interval": 600,
-            "file_rows": 10000
-        }''')
+        data = inspect.cleandoc('''
+        {
+            "interval_millis": 6,
+            "rows_file": 10000
+        }
+        ''')
         f = open(path, 'w')
         f.write(data)
 
