@@ -9,7 +9,7 @@ class Sensor:
     but the behaviour (state) for data generation is here.
     '''
 
-   def __init__(self, source, type, anomaly) -> None:
+    def __init__(self, source, type, anomaly) -> None:
         self.source = source
         self.type = type
         self.anomaly = anomaly
