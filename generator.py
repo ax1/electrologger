@@ -6,16 +6,13 @@
 import json
 import os
 import time
-from Device import Device
-config = None
-devices = []
+from Sensor import Sensor
 
 
 def start():
-    global config
     config = json.loads(os.environ.get('config'))
     tick = config['interval_millis']/1000
-    generate_devices()
+    sensors = generate_sensors(config)
     return
     while(True):
         time.sleep(tick)
@@ -23,11 +20,12 @@ def start():
         collect()
 
 
-def generate_devices():
-    global config, devices
+def generate_sensors(config):
+    sensors = []
     definitions = config['sensors']
     for definition in definitions:
-        devices.append(Device(definition))
+        sensors.append(Sensor(definition))
+    return sensors
 
 
 def next_tick():
