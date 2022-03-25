@@ -12,9 +12,8 @@ class Sensor:
     def __init__(self, definition):
         arr = definition.split(',')
         self.device = arr[0]
-        self.source = arr[0]
-        self.type = arr[0]
-        self.anomaly = arr[0]
+        self.type = arr[1]
+        self.anomaly_type = arr[2]
         self.timestamp = round(time.time() * 1000)
         print(definition)
 

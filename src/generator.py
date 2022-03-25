@@ -6,7 +6,7 @@
 import json
 import os
 import time
-from Sensor import Sensor
+from .Sensor import Sensor
 
 
 def start():
