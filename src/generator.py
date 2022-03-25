@@ -13,11 +13,10 @@ def start():
     config = json.loads(os.environ.get('config'))
     tick = config['interval_millis']/1000
     sensors = generate_sensors(config)
-    return
     while(True):
         time.sleep(tick)
-        next_tick()
-        collect()
+        next_tick(sensors)
+        collect(sensors)
 
 
 def generate_sensors(config):
@@ -28,13 +27,12 @@ def generate_sensors(config):
     return sensors
 
 
-def next_tick():
-    print('aa')
-    #r1 = generate_power_normal()
-    #r2 = generate_power_anomaly()
-    #r3 = generate_fail_normal()
-    #r4 = generate_fail_anomaly()
+def next_tick(sensors):
+    for sensor in sensors:
+        sensor.run()
 
 
-def collect():
-    print('save to log file')
+def collect(sensors):
+    print('')
+    for sensor in sensors:
+        print(str(sensor))
