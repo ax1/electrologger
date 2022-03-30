@@ -37,7 +37,7 @@ class Probe_generic:
         # return self.f(np.random.choice(self.dist))
 
     def f(self, x):
-        return round(self.a*x+self.b, 2)
+        return self.a*x+self.b
 
 
 class Probe_power (Probe_generic):

@@ -19,13 +19,17 @@ class Sensor:
         self.timestamp = now()
         self.probe = Probe(self.type)
         self.value = self.probe.next()
-        #self.anomaly = Value(anomaly_type)
+        # self.anomaly = Value(anomaly_type)
         print(definition)
 
     def run(self):
         self.value = self.probe.next()
         self.timestamp = now()
 
+    def format(self, value):
+        return "{:.2f}".format(value)
+
     def __str__(self):
         human_time = time.strftime('%H:%M%p')  # '%H:%M%p %Z on %b %d, %Y'
-        return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {self.value}'
+        value = self.format(self.value)
+        return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value}'
