@@ -1,6 +1,6 @@
 import time
 from .util import now
-from .Probe import Probe
+from .probe import Probe
 
 
 class Sensor:

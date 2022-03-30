@@ -11,6 +11,10 @@ Configuration: A `shared/config.json` file is created the first time. Tune the v
 
 Run: `python3 main.py`
 
+## Test
+
+Run `python3 -m test.test`
+
 ## Requirements
 
 ### Logs format
