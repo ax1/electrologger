@@ -1,6 +1,6 @@
 import inspect
 import os
-from .generator import start
+from src.generator import start
 
 
 def main():

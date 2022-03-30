@@ -16,35 +16,38 @@ class Probe_generic:
     f(x) = ax + b , f(x) is the linear translation to realistic values
     '''
 
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, _type):
+        self.type = _type
         self.curve = None
-        self.size = 1000
+        self.size = 100
+        self.dist = np.random.default_rng().normal(0, 1, self.size)
+        self.a = 1
+        self.b = 0
         self._oscillator = Linear_oscillator(self.size)
 
     def next(self):
-        return self.f(np.random.choice(self.dist))
-
-    def f(self, x):
-        return round(self.a*x+self.b)
-
-
-class Probe_power (Probe_generic):
-
-    def __init__(self, type):
-        super(type)
-        self.dist = np.random.default_rng().normal(0, 3, self.size)
-        self.a = 1
-        self.x = None
-        self.curve = np.sort(self.dist)
-
-    def next(self, x):
         '''
         The curve must follow
          - time perspective (frontal view): walk on the points, when end path, walk backwards (sinusoidal-like graph)
          - time stripped (side view): the count for all walked points must show the same curve (e.g.:a gaussian distribution)
         '''
-        return self.curve[self._oscillator.next()]
+        x = self.curve[self._oscillator.next()]
+        return self.f(x)
+        # use this instead if only rand values are required (only static normal, no time-based prediction)
+        # return self.f(np.random.choice(self.dist))
+
+    def f(self, x):
+        return round(self.a*x+self.b, 2)
+
+
+class Probe_power (Probe_generic):
+
+    def __init__(self, _type):
+        super().__init__(_type)
+        self.a = 1
+        self.b = 20
+        self.curve = np.sort(self.dist)
+        print(self.curve)
 
 
 class Linear_oscillator:
@@ -55,7 +58,7 @@ class Linear_oscillator:
     '''
 
     def __init__(self, size):
-        self.r = 0
+        self.r = round(size/2)  # start from mean
         self.size = size
         self.forward = True
 
