@@ -16,8 +16,8 @@ Run: `python3 main.py`
 ### Logs format
 
 ````
-12345678, 10:00AM, boiler-672, power, 100, 50, NA,   NA
-12345689, 10:01AM, PC-15542,   fail,  NA,  NA, ERR2, 8
+1648206486787, 10:00AM, boiler-672, power, 100, 50, NA, NA
+1648206498221, 10:01AM, PC-15542,   fail,  NA,  NA, ERR2, 8
 ````
 
 Line format
@@ -29,7 +29,3 @@ timestamp | date | source(id) | type(parameter) | [val_1, val_2] OR [subtype, va
 ## Inserting intelligence-based anomalies
 
 (See IBM email)
-
-
-
-
