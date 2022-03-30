@@ -23,7 +23,10 @@ def generate_sensors(config):
     sensors = []
     definitions = config['sensors']
     for definition in definitions:
-        sensors.append(Sensor(definition))
+        try:
+            sensors.append(Sensor(definition))
+        except Exception as e:
+            print(e)
     return sensors
 
 
@@ -33,6 +36,5 @@ def next_tick(sensors):
 
 
 def collect(sensors):
-    print('')
     for sensor in sensors:
-        print(str(sensor))
+        print(sensor)  # str(sensor)

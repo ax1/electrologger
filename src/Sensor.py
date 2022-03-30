@@ -1,5 +1,6 @@
 import time
 from .util import now
+from .Probe import Probe
 
 
 class Sensor:
@@ -16,11 +17,13 @@ class Sensor:
         self.type = arr[1]
         self.anomaly_type = arr[2]
         self.timestamp = now()
-        self.value = 0
+        self.probe = Probe(self.type)
+        self.value = self.probe.next()
+        #self.anomaly = Value(anomaly_type)
         print(definition)
 
     def run(self):
-        self.value = self.value+1
+        self.value = self.probe.next()
         self.timestamp = now()
 
     def __str__(self):
