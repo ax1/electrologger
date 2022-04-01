@@ -1,0 +1,3 @@
+- [ ] "type" shoud have a two params to configure probe1 and probe2, for now we solve it with a suffix, eg: type_secondary 
+- [ ] add a "normal_cumulative" or a sine-like distributionas type of sensor, this will be very useful in time-series real sensing, for instance, the gaussian does not fit well for a temp sensor daily chart (spikes at the end of periods), but the cumulative distribution works better for these cases (https://en.wikipedia.org/wiki/Gamma_distribution), otherwise, use a pure sine but state that periodic, not rand
+- [ ] change the timer config parameter to speed of the clock (i.e: 1 means clock generates sensor per second, 600 means clock generates 10 minutes per second or per tick )

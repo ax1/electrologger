@@ -32,4 +32,4 @@ timestamp | date | source(id) | type(parameter) | [val_1, val_2] OR [subtype, va
 
 ## Inserting intelligence-based anomalies
 
-(See IBM email)
+(non-public data for now)
