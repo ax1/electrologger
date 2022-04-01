@@ -17,19 +17,23 @@ class Sensor:
         self.type = arr[1]
         self.anomaly_type = arr[2]
         self.timestamp = now()
-        self.probe = Probe(self.type)
-        self.value = self.probe.next()
+        self.probe1 = Probe(self.type)
+        self.probe2 = Probe(self.type+'_sub')
+        self.value1 = self.probe1.next()
+        self.value2 = self.probe2.next()
         # self.anomaly = Value(anomaly_type)
         print(definition)
 
     def run(self):
-        self.value = self.probe.next()
+        self.value1 = self.probe1.next()
+        self.value2 = self.probe2.next()
         self.timestamp = now()
 
     def format(self, value):
         return "{:.2f}".format(value)
 
     def __str__(self):
-        human_time = time.strftime('%H:%M%p')  # '%H:%M%p %Z on %b %d, %Y'
-        value = self.format(self.value)
-        return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value}'
+        human_time = time.strftime('%H:%M:%S:%p')  # '%H:%M%p %Z on %b %d, %Y'
+        value1 = self.format(self.value1)
+        value2 = self.format(self.value2)
+        return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value1}, {value2}, NA, NA'

@@ -4,7 +4,9 @@ import random
 
 def Probe(type):
     if type == 'power':
-        return Probe_power(type)
+        return Probe_power(type, 1, 20)
+    elif type == 'power_sub':
+        return Probe_power(type, 2, 5)
     else:
         raise Exception(f'Sensor type "{type}" not implemented')
 
@@ -19,7 +21,7 @@ class Probe_generic:
     def __init__(self, _type):
         self.type = _type
         self.curve = None
-        self.size = 100
+        self.size = 2000
         self.dist = np.random.default_rng().normal(0, 1, self.size)
         self.a = 1
         self.b = 0
@@ -42,10 +44,10 @@ class Probe_generic:
 
 class Probe_power (Probe_generic):
 
-    def __init__(self, _type):
+    def __init__(self, _type, a, b):
         super().__init__(_type)
-        self.a = 1
-        self.b = 20
+        self.a = a
+        self.b = b
         self.curve = np.sort(self.dist)
         print(self.curve)
 
@@ -63,7 +65,7 @@ class Linear_oscillator:
         self.forward = True
 
     def next(self):
-        # s=s+1 if self.forward else s=s+1 # this is the "pure" function
+        # s = 1 if self.forward else -1  # this is the "pure" function
         s = random.randint(1, 9) if self.forward else -random.randint(1, 9)
         self.r = self.r+s
         if self.r >= self.size:
