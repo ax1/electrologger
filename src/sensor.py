@@ -1,4 +1,6 @@
+import imp
 import time
+from datetime import datetime
 from .util import now
 from .probe import Probe
 
@@ -24,16 +26,19 @@ class Sensor:
         # self.anomaly = Value(anomaly_type)
         print(definition)
 
-    def run(self):
+    def run(self, timestamp):
         self.value1 = self.probe1.next()
         self.value2 = self.probe2.next()
-        self.timestamp = now()
+        #self.timestamp = now()
+        self.timestamp = timestamp
 
     def format(self, value):
         return "{:.2f}".format(value)
 
     def __str__(self):
-        human_time = time.strftime('%H:%M:%S:%p')  # '%H:%M%p %Z on %b %d, %Y'
+        # '%H:%M%p %Z on %b %d, %Y'
+        human_time = time.strftime(
+            '%H:%M:%S:%p', time.localtime(self.timestamp/1000))
         value1 = self.format(self.value1)
         value2 = self.format(self.value2)
         return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value1}, {value2}, NA, NA'

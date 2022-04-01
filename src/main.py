@@ -24,7 +24,7 @@ def loadConfigFile():
 
 template = '''
 {
-    "interval_millis": 6,
+    "speed": "1s",
     "rows_file": 10000,
     "sensors": [
         "boiler-672,power,normal",

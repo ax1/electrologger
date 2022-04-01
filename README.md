@@ -9,9 +9,9 @@ Those encrypted logs are then computed homomorphically and detect anomalies on d
 
 Configuration: A `shared/config.json` file is created the first time. Tune the values if needed.
 
-Run: `python3 main.py`
+Run: `python3 main.py` . The app creates ASAP a valid log file, then wait 10 min to create another one. So 2 options: run/stop several times the app to get many files, or leave the app running to create one file every 10 minutes 
 
-## Test
+## Test (for developers)
 
 Run `python3 -m test.test`
 
