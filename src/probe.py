@@ -63,19 +63,22 @@ class Linear_oscillator:
         self.r = round(size/2)  # start from mean
         self.size = size
         self.forward = True
+        self.step = round(size/10)
 
     def next(self):
-        # s = 1 if self.forward else -1  # this is the "pure" function
-        s = random.randint(1, 9) if self.forward else -random.randint(1, 9)
+        # s = 1 if self.forward else -1  # this is the "pure" function to compare with
+        sign = random.choice([-1, 1])
+        bias = 1 if self.forward else -1
+        #s = random.randint(1, self.step) if self.forward else -random.randint(1, self.step)
+        s = sign*random.randint(1, self.step)+bias
         self.r = self.r+s
         if self.r >= self.size:
             self.forward = False
-            return self.next()
+            self.r = self.r-s
         elif self.r <= 0:
             self.forward = True
-            return self.next()
-        else:
-            return self.r
+            self.r = self.r-s
+        return self.r
 
 # test linear oscillator
 # curve = Linear_oscillator(100)
