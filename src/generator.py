@@ -9,6 +9,7 @@ import time
 from src.sensor import Sensor
 from src.util import now, sdate
 import re
+import random
 
 
 def start():
@@ -60,7 +61,16 @@ def next_tick(sensors, timestamp):
 
 def collect(sensors, rows):
     for sensor in sensors:
-        rows.append(str(sensor))
+        s = str(sensor)
+        if generate_error() == True:
+            s = sensor.create_error()
+        if s != '':
+            rows.append(s)
+
+
+def generate_error():
+    val = random.randint(-1, 200)
+    return True if val < 0 else False
 
 
 def speed(definition):

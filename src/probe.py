@@ -11,7 +11,7 @@ def Probe(type):
         raise Exception(f'Sensor type "{type}" not implemented')
 
 
-class Probe_generic:
+class Probe_normal:
     '''
     dist = the normalized distribution function [0,1]
     x = dist()
@@ -42,7 +42,7 @@ class Probe_generic:
         return self.a*x+self.b
 
 
-class Probe_power (Probe_generic):
+class Probe_power (Probe_normal):
 
     def __init__(self, _type, a, b):
         super().__init__(_type)
