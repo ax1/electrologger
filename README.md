@@ -13,7 +13,7 @@ Run: `python3 main.py` . The app creates ASAP a valid log file, then wait 10 min
 
 ## Test (for developers)
 
-Run `python3 -m test.test`
+Run either `python3 test.py` or `python3 -m test.test`
 
 ## Requirements
 
