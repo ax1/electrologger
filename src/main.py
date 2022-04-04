@@ -29,9 +29,7 @@ template = '''
     "rows_file": 10000,
     "sensors": [
         "boiler-672,power,normal",
-        "PC-15542,fail,anomaly_1",
         "laptop-33,temp,anomaly_2",
-        "laptop-33,fail,anomaly_1",
         "laptop-35,temp,normal"
     ]
 }

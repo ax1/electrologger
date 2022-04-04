@@ -28,6 +28,11 @@ Files are stored in the `shared/log/` folder. The folder can be read and delete 
 1648206498221, 10:01AM, PC-15542,   fail,  NA,  NA, ERR2, 8
 ````
 
+Three kind of data;
+- NORMAL data, sensors producing data
+- ANOMALY data, sensors producing data not following historical behaviour
+- ERROR events, atomic events producing "alert" error codes 
+
 Line format
 
 ``` 
