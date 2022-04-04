@@ -52,6 +52,16 @@ class Probe_power (Probe_generic):
         print(self.curve)
 
 
+class Probe_timeseries_arima:
+
+    def __init__(self, _type, a, b):
+        # TODO
+        self.a = a
+        self.b = b
+        self.curve = np.sort(self.dist)
+        print(self.curve)
+
+
 class Linear_oscillator:
     '''
     A periodic function, with LINEAR weight, and with random steps to behave as real and not simulated
