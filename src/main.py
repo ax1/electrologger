@@ -9,11 +9,12 @@ def main():
 
 def loadConfigFile():
     data = None
-    path = 'config/config.json'
+    path = 'shared/config/config.json'
     try:
         f = open(path, 'r')
         data = f.read()
     except FileNotFoundError:
+        os.makedirs(os.path.dirname(path), exist_ok=True)
         data = inspect.cleandoc(template)
         f = open(path, 'w')
         f.write(data)

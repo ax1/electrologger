@@ -7,25 +7,38 @@ import json
 import os
 import time
 from src.sensor import Sensor
-from src.util import now
+from src.util import now, sdate
+import re
 
 
 def start():
     config = json.loads(os.environ.get('config'))
-    millis = speed(config['speed'])
+    elapsed = speed(config['speed'])
     sensors = generate_sensors(config)
     timestamp = now()
     counter = 0
+    rows = []
+    filename = None
+    folder = 'shared/log/'
     while(True):
+        if(filename == None):
+            os.makedirs(os.path.dirname(folder), exist_ok=True)
+            filename = re.sub('/|\:', '', sdate(timestamp)+'.csv')
+            filename = filename.replace(' ', '_')
         # time.sleep(1)
-        timestamp = timestamp+millis
+        timestamp = timestamp+elapsed
         next_tick(sensors, timestamp)
-        collect(sensors)
+        collect(sensors, rows)
         counter = counter+len(sensors)
-        if counter > 10000:
+        if counter >= 10000:
             # generate log file
+            f = open(folder+filename, 'w')
+            f.write('\n'.join(rows))
+            print(f'Created {filename} file in 10 minutes...')
+            rows = []
+            filename = None
             print('Preparing another log file in 10 minutes...')
-            time.sleep(10*60*1000)  # 10 min
+            time.sleep(10*60)  # 10 min
             counter = 0
 
 
@@ -45,9 +58,9 @@ def next_tick(sensors, timestamp):
         sensor.run(timestamp)
 
 
-def collect(sensors):
+def collect(sensors, rows):
     for sensor in sensors:
-        print(sensor)  # str(sensor)
+        rows.append(str(sensor))
 
 
 def speed(definition):

@@ -13,9 +13,11 @@ pip install numpy
 ```
 ## Usage
 
-Configuration: A `shared/config.json` file is created the first time. Tune the values if needed.
+Configuration: A `shared/config/config.json` file is created the first time. Tune the values if needed.
 
-Run: `python3 main.py` . The app creates ASAP a valid log file, then wait 10 min to create another one. So 2 options: run/stop several times the app to get many files, or leave the app running to create one file every 10 minutes 
+Run: `python3 main.py` . The app creates ASAP a valid log file, then wait 10 min to create another one. So 2 options: run/stop several times the app to get many files, or leave the app running to create one file every 10 minutes.
+
+Files are stored in the `shared/log/` folder. The folder can be read and delete in run-time (files are generated when buffer is full, and the log folder is recreated if not exists).
 
 ## Requirements
 

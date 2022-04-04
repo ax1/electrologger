@@ -38,7 +38,7 @@ class Sensor:
     def __str__(self):
         # '%H:%M%p %Z on %b %d, %Y'
         human_time = time.strftime(
-            '%H:%M:%S:%p', time.localtime(self.timestamp/1000))
+            '%H:%M:%S %p', time.localtime(self.timestamp/1000))
         value1 = self.format(self.value1)
         value2 = self.format(self.value2)
         return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value1}, {value2}, NA, NA'
