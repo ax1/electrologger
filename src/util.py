@@ -1,5 +1,4 @@
-from dataclasses import dataclass
-from time import time
+import time
 
 
 def now():
@@ -10,4 +9,12 @@ def now():
 
      This epoch is 100% equivalent to timestamp in other laguages
     '''
-    return round(time() * 1000)
+    return round(time.time() * 1000)
+
+
+def sdate(timestamp):
+    '''
+    Note: timestamp is epoch time in millis (not in micros)
+    '''
+    return time.strftime(
+        '%Y/%m/%d %H:%M:%S', time.localtime(timestamp/1000))

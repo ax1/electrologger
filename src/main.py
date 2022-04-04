@@ -9,7 +9,7 @@ def main():
 
 def loadConfigFile():
     data = None
-    path = 'shared/config.json'
+    path = 'config/config.json'
     try:
         f = open(path, 'r')
         data = f.read()
