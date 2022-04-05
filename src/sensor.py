@@ -1,9 +1,10 @@
 import imp
 import time
 from datetime import datetime
-from .util import now
+from .util import now, htime
 from .probe import Probe
 import random
+from .anomaly import Anomaly
 
 
 class Sensor:
@@ -24,14 +25,14 @@ class Sensor:
         self.probe2 = Probe(self.type+'_sub')
         self.value1 = self.probe1.next()
         self.value2 = self.probe2.next()
-        # self.anomaly = Value(anomaly_type)
+        self.counter = 0
         print(definition)
 
     def run(self, timestamp):
+        self.counter = self.counter+1
         self.value1 = self.probe1.next()
         self.value2 = self.probe2.next()
-        #self.timestamp = now()
-        self.timestamp = timestamp
+        self.timestamp = timestamp  # s elf.timestamp = now()
 
     def format(self, value):
         return "{:.2f}".format(value)
@@ -40,17 +41,19 @@ class Sensor:
         # when no values->no record
         if self.value1 == None and self.value2 == None:
             return ''
-        # '%H:%M%p %Z on %b %d, %Y'
-        human_time = time.strftime(
-            '%I:%M:%S%p', time.localtime(self.timestamp/1000))
+        human_time = htime(self.timestamp)
         value1 = self.format(self.value1)
         value2 = self.format(self.value2)
         return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value1}, {value2}, NA, NA'
 
     def create_error(self):
-        human_time = time.strftime(
-            '%I:%M:%S%p', time.localtime(self.timestamp/1000))
+        human_time = htime(self.timestamp)
         print(f'Creating FAIL in {self.device} at {human_time}')
-        value1 = self.format(self.value1)
-        value2 = self.format(self.value2)
         return f'{self.timestamp}, {human_time}, {self.device}, fail, NA, NA, ERR{random.randint(1, 10)}, {random.randint(1, 100)}'
+
+    def generate_anomaly(self, timestamp):
+        if(self.anomaly_type != 'normal'):
+            human_time = htime(self.timestamp)
+            print(
+                f'Creating ANOMALY {self.anomaly_type} in {self.device} at {human_time}')
+            self.probe1.anomaly = Anomaly(self.anomaly_type)

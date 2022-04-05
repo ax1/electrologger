@@ -11,7 +11,7 @@ def Probe(type):
         raise Exception(f'Sensor type "{type}" not implemented')
 
 
-class Probe_normal:
+class Probe_gaussian:
     '''
     dist = the normalized distribution function [0,1]
     x = dist()
@@ -26,6 +26,7 @@ class Probe_normal:
         self.a = 1
         self.b = 0
         self._oscillator = Linear_oscillator(self.size)
+        self.anomaly = None
 
     def next(self):
         '''
@@ -33,7 +34,15 @@ class Probe_normal:
          - time perspective (frontal view): walk on the points, when end path, walk backwards (sinusoidal-like graph)
          - time stripped (side view): the count for all walked points must show the same curve (e.g.:a gaussian distribution)
         '''
-        x = self.curve[self._oscillator.next()]
+        point = self._oscillator.next()
+        x = self.curve[point]
+
+        # if anomaly is isalive, change the value
+        if self.anomaly != None:
+            if self.anomaly.is_alive() == False:
+                self.anomaly = None  # destroy anomaly
+            else:
+                x = self.anomaly.a*x+self.anomaly.b
         return self.f(x)
         # use this instead if only rand values are required (only static normal, no time-based prediction)
         # return self.f(np.random.choice(self.dist))
@@ -42,24 +51,25 @@ class Probe_normal:
         return self.a*x+self.b
 
 
-class Probe_power (Probe_normal):
+class Probe_power (Probe_gaussian):
 
     def __init__(self, _type, a, b):
         super().__init__(_type)
         self.a = a
         self.b = b
         self.curve = np.sort(self.dist)
-        print(self.curve)
+        # print(self.curve)
 
 
 class Probe_timeseries_arima:
 
     def __init__(self, _type, a, b):
-        # TODO
+        # TODO (see the test folder)
         self.a = a
         self.b = b
         self.curve = np.sort(self.dist)
-        print(self.curve)
+        self.anomaly = None
+        # print(self.curve)
 
 
 class Linear_oscillator:

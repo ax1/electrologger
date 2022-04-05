@@ -56,6 +56,8 @@ def generate_sensors(config):
 
 def next_tick(sensors, timestamp):
     for sensor in sensors:
+        if generate_anomaly() == True:
+            sensor.generate_anomaly(timestamp)
         sensor.run(timestamp)
 
 
@@ -69,7 +71,12 @@ def collect(sensors, rows):
 
 
 def generate_error():
-    val = random.randint(-1, 200)
+    val = random.randint(-1, 200)  # 200 = 100 errors/file10K
+    return True if val < 0 else False
+
+
+def generate_anomaly():
+    val = random.randint(-1, 1000)  # 200 = 10 anomalies/file10K
     return True if val < 0 else False
 
 

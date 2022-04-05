@@ -27,9 +27,10 @@ template = '''
 {
     "speed": "1s",
     "rows_file": 10000,
+    "anomalies":["normal","anomaly_sigma"],
     "sensors": [
         "boiler-672,power,normal",
-        "laptop-33,temp,anomaly_2",
+        "laptop-33,power,anomaly_sigma",
         "laptop-35,temp,normal"
     ]
 }

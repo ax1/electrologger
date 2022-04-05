@@ -18,3 +18,11 @@ def sdate(timestamp):
     '''
     return time.strftime(
         '%Y/%m/%d %H:%M:%S', time.localtime(timestamp/1000))
+
+
+def htime(timestamp):
+    '''
+    Time in custom format. Only useful for output logs
+    '''
+    return time.strftime(
+        '%I:%M:%S%p', time.localtime(timestamp/1000))  # '%H:%M%p %Z on %b %d, %Y'
