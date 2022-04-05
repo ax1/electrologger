@@ -26,12 +26,16 @@ def loadConfigFile():
 template = '''
 {
     "speed": "1s",
-    "rows_file": 10000,
-    "anomalies":["normal","anomaly_sigma"],
+    "rows": 10000,
     "sensors": [
         "boiler-672,power,normal",
         "laptop-33,power,anomaly_sigma",
         "laptop-35,temp,normal"
-    ]
+    ],
+    "help": {
+        "speed": "1s 5s 1m 15m 0.1s...etc",
+        "rows": "number of total rows per file",
+        "sensors": "format: device_id,sensor_type,anomaly_type where sensor_type=power,temp,etc and anomaly_type=normal(no anomaly),anomaly_sigma, etc.."
+    }
 }
 '''

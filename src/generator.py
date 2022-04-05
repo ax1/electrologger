@@ -15,6 +15,7 @@ import random
 def start():
     config = json.loads(os.environ.get('config'))
     elapsed = speed(config['speed'])
+    max_rows = config['rows']
     sensors = generate_sensors(config)
     timestamp = now()
     counter = 0
@@ -31,11 +32,11 @@ def start():
         next_tick(sensors, timestamp)
         collect(sensors, rows)
         counter = counter+len(sensors)
-        if counter >= 10000:
+        if counter >= max_rows:
             # generate log file
             f = open(folder+filename, 'w')
             f.write('\n'.join(rows))
-            print(f'Created {filename} file in 10 minutes...')
+            print(f'Created {filename} file')
             rows = []
             filename = None
             print('Preparing another log file in 10 minutes...')
