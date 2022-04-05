@@ -42,14 +42,14 @@ class Sensor:
             return ''
         # '%H:%M%p %Z on %b %d, %Y'
         human_time = time.strftime(
-            '%H:%M:%S %p', time.localtime(self.timestamp/1000))
+            '%I:%M:%S%p', time.localtime(self.timestamp/1000))
         value1 = self.format(self.value1)
         value2 = self.format(self.value2)
         return f'{self.timestamp}, {human_time}, {self.device}, {self.type}, {value1}, {value2}, NA, NA'
 
     def create_error(self):
         human_time = time.strftime(
-            '%H:%M:%S %p', time.localtime(self.timestamp/1000))
+            '%I:%M:%S%p', time.localtime(self.timestamp/1000))
         print(f'Creating FAIL in {self.device} at {human_time}')
         value1 = self.format(self.value1)
         value2 = self.format(self.value2)

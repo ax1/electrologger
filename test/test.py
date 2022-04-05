@@ -55,6 +55,6 @@ def test_timeseries_arima():
 
 
 # test_oscillator()
-# test_sensor()
+test_sensor()
 # test_plot()
-test_timeseries_arima()
+# test_timeseries_arima()
