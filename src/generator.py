@@ -21,7 +21,7 @@ def start():
     counter = 0
     rows = []
     filename = None
-    folder = 'shared/log/'
+    folder = 'log/'
     while(True):
         if(filename == None):
             os.makedirs(os.path.dirname(folder), exist_ok=True)
