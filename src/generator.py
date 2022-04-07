@@ -72,12 +72,13 @@ def collect(sensors, rows):
 
 
 def generate_error():
-    val = random.randint(-1, 200)  # 200 = 100 errors/file10K
+    val = random.randint(-1, 2000)  # 2000 = 10 errors-events/file10K
     return True if val < 0 else False
 
 
 def generate_anomaly():
-    val = random.randint(-1, 1000)  # 200 = 10 anomalies/file10K
+    # 5000 = 1 anomalies/file10K = for 5 sensors= 1 file with sensor-anomaly in every 5 files
+    val = random.randint(-1, 10000)
     return True if val < 0 else False
 
 
