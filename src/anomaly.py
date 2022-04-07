@@ -10,7 +10,9 @@ class Anomaly:
         self.a = 1  # multiplier. Eg: f(x)=2x+4 -> g(x)=(sigma*2)x+4
         self.b = 0  # addition.Eg: f(x)=2x+4 -> g(x)=2x+mean*4
         if(type == 'anomaly_sigma'):
-            self.a = 5
+            self.a = 2
+        elif(type == 'anomaly_mean'):
+            self.b = 20
         else:
             raise f'anomaly type "{type}" is not implemented'
 

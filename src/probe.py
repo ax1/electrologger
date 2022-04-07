@@ -6,7 +6,11 @@ def Probe(type):
     if type == 'power':
         return Probe_power(type, 1, 20)
     elif type == 'power_sub':
-        return Probe_power(type, 2, 5)
+        return Probe_random(type, 2, 5)
+    if type == 'duration':
+        return Probe_random(type, 10, 45)
+    elif type == 'duration_sub':
+        return Probe_power(type, 0.2, 7)
     else:
         raise Exception(f'Sensor type "{type}" not implemented')
 
@@ -36,19 +40,22 @@ class Probe_gaussian:
         '''
         point = self._oscillator.next()
         x = self.curve[point]
-
-        # if anomaly is isalive, change the value
-        if self.anomaly != None:
-            if self.anomaly.is_alive() == False:
-                self.anomaly = None  # destroy anomaly
-            else:
-                x = self.anomaly.a*x+self.anomaly.b
         return self.f(x)
         # use this instead if only rand values are required (only static normal, no time-based prediction)
         # return self.f(np.random.choice(self.dist))
 
     def f(self, x):
-        return self.a*x+self.b
+        a = self.a
+        b = self.b
+        # if anomaly is isalive, change the value
+        if self.anomaly != None:
+            if self.anomaly.is_alive() == False:
+                self.anomaly = None  # destroy anomaly
+            else:
+                a = a*self.anomaly.a
+                b = b+self.anomaly.b
+
+        return a*x+b
 
 
 class Probe_power (Probe_gaussian):
@@ -59,6 +66,15 @@ class Probe_power (Probe_gaussian):
         self.b = b
         self.curve = np.sort(self.dist)
         # print(self.curve)
+
+
+class Probe_random(Probe_gaussian):
+
+    def __init__(self, _type, a, b):
+        super().__init__(_type)
+        self.a = a
+        self.b = b
+        self.curve = self.dist  # do not sort, jump to any point
 
 
 class Probe_timeseries_arima:

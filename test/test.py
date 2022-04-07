@@ -14,14 +14,24 @@ def test_oscillator():
     print()
 
 
-def test_sensor():
-    sensor = Sensor('boiler-672,power,normal')
+def test_sensor(definition):
+    sensor = Sensor(definition)
     arr = []
     timestamp = 0
+
+    # pure data
     for r in range(2000):
         timestamp += 1
         sensor.run(timestamp)
         arr.append(sensor.value1)
+
+    # if anomaly, add more data
+    sensor.generate_anomaly(timestamp)
+    for r in range(500):
+        timestamp += 1
+        sensor.run(timestamp)
+        arr.append(sensor.value1)
+
     narr = np.array(arr)
 
     #plt.hist(narr, bins=50, density=True)
@@ -55,6 +65,7 @@ def test_timeseries_arima():
 
 
 # test_oscillator()
-test_sensor()
+# test_sensor('boiler-672,power,normal')
+test_sensor('chargeEV,duration,anomaly_mean')
 # test_plot()
 # test_timeseries_arima()
