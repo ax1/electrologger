@@ -12,3 +12,5 @@ Run either `python3 test.py` or `python3 -m test.test`
 # Info
 
 Info for forecasting https://otexts.com/fpp2/
+
+EV data from Caltech https://ev.caltech.edu/dataset/
