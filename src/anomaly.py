@@ -7,12 +7,14 @@ class Anomaly:
         self.counter = 0
         self.type = type
         self.life = random.randint(2000, 4000)
-        self.a = 1  # multiplier. Eg: f(x)=2x+4 -> g(x)=(sigma*2)x+4
-        self.b = 0  # addition.Eg: f(x)=2x+4 -> g(x)=2x+mean*4
+        # multiplier. Direct sigma change Eg: f(x)=2x+4 -> g(x)=(a*2)x+4
+        self.a = 1
+        # multiplier. mean deviation in number of sigmas  .Eg: f(x)=2x+4 -> g(x)=2x+4+(2*b)
+        self.b = 0
         if(type == 'anomaly_sigma'):
-            self.a = 2
+            self.a = random.randint(2, 5)
         elif(type == 'anomaly_mean'):
-            self.b = 20
+            self.b = random.randint(4, 7)  # min mean deviation=4
         else:
             raise f'anomaly type "{type}" is not implemented'
 

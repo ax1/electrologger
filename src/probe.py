@@ -8,7 +8,7 @@ def Probe(type):
     elif type == 'power_sub':
         return Probe_random(type, 2, 5)
     if type == 'duration':
-        return Probe_random(type, 10, 45)
+        return Probe_random(type, 5, 40)
     elif type == 'duration_sub':
         return Probe_power(type, 0.2, 7)
     else:
@@ -53,7 +53,7 @@ class Probe_gaussian:
                 self.anomaly = None  # destroy anomaly
             else:
                 a = a*self.anomaly.a
-                b = b+self.anomaly.b
+                b = b+(a*self.anomaly.b)
 
         return a*x+b
 
