@@ -12,13 +12,14 @@ import re
 import random
 
 
-def start():
+def start(sleep):
     config = json.loads(os.environ.get('config'))
     elapsed = speed(config['speed'])
     max_rows = config['rows']
     sensors = generate_sensors(config)
     timestamp = now()
     counter = 0
+    files = 0
     rows = []
     filename = None
     folder = 'log/'
@@ -36,11 +37,15 @@ def start():
             # generate log file
             f = open(folder+filename, 'w')
             f.write('\n'.join(rows))
-            print(f'Created {filename} file')
+            print(f'> Created {filename} file')
+            files += 1
+            if files >= 100 and sleep == 0:
+                print('> All files created. Application will stop NOW')
+                exit(0)
             rows = []
             filename = None
-            print('Preparing another log file in 10 minutes...')
-            time.sleep(10*60)  # 10 min
+            print(f'> Preparing another log file in {sleep} seconds...')
+            time.sleep(sleep)  # 10 min
             counter = 0
 
 
@@ -72,13 +77,13 @@ def collect(sensors, rows):
 
 
 def generate_error():
-    val = random.randint(-1, 2000)  # 2000 = 10 errors-events/file10K
+    val = random.randint(-1, 4000)  # 2000 = 5 errors-events/file10K
     return True if val < 0 else False
 
 
 def generate_anomaly():
-    # 5000 = 1 anomalies/file10K = for 5 sensors= 1 file with sensor-anomaly in every 5 files
-    val = random.randint(-1, 10000)
+    # 20000 = 0.5 anomalies/file10K = for 5 sensors= 1 file with sensor-anomaly in every 10 files
+    val = random.randint(-1, 20000)
     return True if val < 0 else False
 
 

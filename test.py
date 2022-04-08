@@ -1,1 +1,3 @@
-import test.test
+import test.test as test
+
+test.main()
