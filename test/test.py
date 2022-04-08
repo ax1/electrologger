@@ -24,22 +24,29 @@ def test_sensor(definition):
         timestamp += 1
         sensor.run(timestamp)
         arr.append(sensor.value1)
+    backup = np.array(arr)
 
     # if anomaly, add more data
     sensor.generate_anomaly(timestamp)
-    for r in range(500):
+    for r in range(2000):
         timestamp += 1
         sensor.run(timestamp)
         arr.append(sensor.value1)
 
+    # paint data
     narr = np.array(arr)
-
-    #plt.hist(narr, bins=50, density=True)
+    (m, mb) = np.histogram(backup, bins=10, density=True)
     (n, bins) = np.histogram(narr, bins=10, density=True)
     fig, axd = plt.subplot_mosaic(
         [['a', 'b'], ['c', 'c']], layout='constrained')
-    axd['a'].plot(.5 * (bins[1:] + bins[:-1]), n)
+    axd['a'].set_title('Original')
+    axd['b'].set_title('Anomaly')
+    axd['c'].set_title('Timeline')
+    axd['a'].plot(.5 * (mb[1:] + mb[:-1]), m)
+    axd['b'].plot(.5 * (bins[1:] + bins[:-1]), n)
     axd['c'].plot(narr)
+    # = plt.get_current_fig_manager()
+    # manager.full_screen_toggle()
     plt.show()
 
 
@@ -64,8 +71,10 @@ def test_timeseries_arima():
     plt.show()
 
 
-# test_oscillator()
-# test_sensor('boiler-672,power,normal')
-test_sensor('chargeEV,duration,anomaly_mean')
-# test_plot()
-# test_timeseries_arima()
+def main():
+    # test_oscillator()
+    # test_sensor('boiler-672,power,normal')
+    # test_sensor('chargeEV,duration,anomaly_sigma')
+    test_sensor('chargeEV,duration,anomaly_mean')
+    # test_plot()
+    # test_timeseries_arima()
