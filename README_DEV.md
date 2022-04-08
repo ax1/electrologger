@@ -7,7 +7,7 @@
 
 # Test
 
-Run either `python3 test.py` or `python3 -m test.test`
+Run either `python test.py` or `python -m test.test`
 
 # Info
 

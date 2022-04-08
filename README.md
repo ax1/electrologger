@@ -1,5 +1,7 @@
 # Electrologger
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 Data log generator for emulating EV charge events. The logs contain normal data, from time to time, an anomaly is generated making the sensor to provide new data. This anomaly can be detected by using AI techniques. 
 
 The logs are created in plain text.They will be homomorphically encrypted by an external agent to protect privacy on data.
@@ -61,10 +63,6 @@ Three kind of data:
 ## Inserting intelligence-based anomalies
 
 ( This information is only available to project partners for now)
-
-# License
-
-[MIT](LICENSE.txt)
 
 # Acknowledgements
 
