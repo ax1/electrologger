@@ -73,8 +73,8 @@ def test_timeseries_arima():
 
 def main():
     # test_oscillator()
-    # test_sensor('boiler-672,power,normal')
+    test_sensor('boiler-672,power,anomaly_sigma')  # POWER: periodic life
     # test_sensor('chargeEV,duration,anomaly_sigma')
-    test_sensor('chargeEV,duration,anomaly_mean')
+    test_sensor('chargeEV,duration,anomaly_mean')  # DURATION: random life
     # test_plot()
     # test_timeseries_arima()
