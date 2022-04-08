@@ -13,7 +13,7 @@ def main():
     help = f'''Generate log files with different anomalies.
 
 Usage:
-    {YELLOW}python3 main [option]{RESET}
+    {YELLOW}python main [option]{RESET}
     (a config.json file is created the first time. Add more sensors in that file).
 
 option: 

@@ -1,35 +1,38 @@
 # Electrologger
 
-Data log generator for emulating EV charge events.
+Data log generator for emulating EV charge events. The logs contain normal data, from time to time, an anomaly is generated making the sensor to provide new data. This anomaly can be detected by using AI techniques. 
 
-Logs created in plain text and homomorphically encrypted externally.
-Those encrypted logs are then computed homomorphically and detect anomalies on data.
+The logs are created in plain text.They will be homomorphically encrypted by an external agent to protect privacy on data.
+Those encrypted logs are then computed to detect anomalies on data, without sharing the real values.
 
 ## Installation
 
+> Note: python 3 is required
+
 ```
 git clone https://github.com/ax1/electrologger.git
-pip install numpy
+cd electrologger
+pip install numpy matplotlib
 ```
 ## Usage
 
 ### Configuration
 
-A `config.json` file is created the first time. Tune the values if needed.
+A `config.json` file will be created automatically the first time. Tune the values if needed.
 
 ### Run
 
 ```sh
-python3 main.py # display help with commands
-# python3 main.py run # generate log files every 10 minutes
-# python3 main.py all # generate a full dataset of logs and stop
+python main.py # display help with commands
+# python main.py run # generate log files every 10 minutes
+# python main.py all # generate a full dataset of logs and stop
 ```
 
 Files are stored in the `log/` folder. The folder can be read and deleted in run-time (files are generated when buffer is full, and the log folder is recreated if not exists).
 
-Debug: `python3 debug.py`
+Debug: `python debug.py`
 
-Test: `python3 test.py`
+Test: `python test.py`
 
 
 ## Logs format
@@ -38,20 +41,22 @@ Test: `python3 test.py`
 1648206486787, 10:00AM, boiler-672, power, 100, 50, NA, NA
 1648206498221, 10:01AM, PC-15542,   fail,  NA,  NA, ERR2, 8
 ````
+
+Where line format is:
+``` 
+timestamp | date | source(id) | type(parameter) | [val_1, val_2] OR [subtype, val_1]
+``` 
+
 Two kind of sensors:
 - **Gaussian random walk**. The timeline behaves like a periodic continuous sensor with noise.
 - **Gaussian random jump**. The timeline is fully random. The sum of random values still following a normal distribution. 
 
-Three kind of data;
+Three kind of data:
 - NORMAL data, sensors producing data.
 - ANOMALY data, sensors producing data not following historical behaviour.
-- ERROR events, atomic events producing "alert" error codes.
+- ERROR events, atomic events producing "FAIL" error codes.
 
-Line format
 
-``` 
-timestamp | date | source(id) | type(parameter) | [val_1, val_2] OR [subtype, val_1]
-``` 
 
 ## Inserting intelligence-based anomalies
 
