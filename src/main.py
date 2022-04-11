@@ -42,7 +42,7 @@ def loadConfigFile():
         f = open(path, 'r')
         data = f.read()
     except FileNotFoundError:
-        os.makedirs(os.path.dirname(path), exist_ok=True)
+        # os.makedirs(os.path.dirname(path), exist_ok=True)
         data = inspect.cleandoc(template)
         f = open(path, 'w')
         f.write(data)
