@@ -8,7 +8,7 @@ The logs are created in plain text. They will be homomorphically encrypted by an
 
 ## Installation
 
-> Note: python 3 is required
+> Note: Python3 is required
 
 ```
 git clone https://github.com/ax1/electrologger.git
