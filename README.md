@@ -48,11 +48,11 @@ Where line format is:
 timestamp | date | source(id) | type(parameter) | [val_1, val_2] OR [subtype, val_1]
 ``` 
 
-Two kind of sensors:
+Two kinds of sensors:
 - **Gaussian random walk**. The timeline behaves like a periodic continuous sensor with noise.
 - **Gaussian random jump**. The timeline is fully random. The sum of random values still following a normal distribution. 
 
-Three kind of data:
+Three kinds of data:
 - NORMAL data, sensors producing data.
 - ANOMALY data, sensors producing data not following historical behaviour.
 - ERROR events, atomic events producing "FAIL" error codes.
