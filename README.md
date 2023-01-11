@@ -58,10 +58,9 @@ Three kinds of data:
 - ERROR events, atomic events producing "FAIL" error codes.
 
 
-
 ## Inserting intelligence-based anomalies
 
-( This information is only available to project partners for now)
+(This information is only available to project partners. The public information will be available at the UE ELECTRON project website) 
 
 # Acknowledgements
 
