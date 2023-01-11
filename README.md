@@ -4,8 +4,7 @@
 
 Data log generator for emulating EV charge events. The logs contain normal data, from time to time, an anomaly is generated making the sensor to provide new data. This anomaly can be detected by using AI techniques. 
 
-The logs are created in plain text.They will be homomorphically encrypted by an external agent to protect privacy on data.
-Those encrypted logs are then computed to detect anomalies on data, without sharing the real values.
+The logs are created in plain text. They will be homomorphically encrypted by an external agent to protect privacy on data. The encrypted logs are then computed to detect anomalies on data, without sharing the real values.
 
 ## Installation
 
